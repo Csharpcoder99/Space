@@ -10,7 +10,18 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    
+
+    system("clear");
+
+    class breathTaker
+    {
+        public:
+        int breathTaker_damage;
+        int lasting_affects;
+        
+
+    };
+
     class Radetion
     {
         public:
@@ -24,6 +35,8 @@ int main(int argc, const char * argv[]) {
         int total_people;
         int person1_health;
         int person2_health;
+        int person1_breath;
+        int person2_breath;
         string name1;
         string name2;
         
@@ -96,9 +109,17 @@ int main(int argc, const char * argv[]) {
     people.name2 = "Doug";
     people.person1_health = 200;
     people.person2_health = 200;
+    people.person1_breath = 400;
+    people.person2_breath = 400;
+
     
     Radetion radtion;
     radtion.damage = 30;
+
+    breathTaker Breathtaker;
+    Breathtaker.breathTaker_damage = 20;
+    Breathtaker.lasting_affects = 30;
+
     
     
     
@@ -124,7 +145,7 @@ int main(int argc, const char * argv[]) {
             /* Declaring argument for time()
             time_t tt;
           
-             Declaring variable to store return value of
+            //Declaring variable to store return value of
             // localtime()
             struct tm * ti;
           
@@ -141,27 +162,42 @@ int main(int argc, const char * argv[]) {
             
             if (rocket.direction == station.direction)
             {
+
+                people.person1_health = 170 - radtion.damage;
+                people.person2_health = 170 - radtion.damage;
+                cout << "Rocket and Space station Stats: " << endl;
                 cout << rocket.name << " is facing the the space station" << endl;
                 cout << "Station Direction: " << station.direction << endl;
                 cout << "Rocket Direction:  " << rocket.direction << endl;
-                
                 cout << "Station Distance: "  << station.distance << endl;
                 cout << "Rocket Distance: " << rocket.distance << endl;
-                people.person1_health = 170 - radtion.damage;
-                people.person2_health = 170 - radtion.damage;
+
+                cout << endl;
+
+                cout << "Person Stats" << endl;
                 cout << "Person Health: " << people.person1_health << " Person 2 Health: " << people.person2_health << endl;
-                
+                cout << people.name1  << " Air: " << people.person1_breath << " " << people.name2 << " Air: " << people.person2_breath << endl;
                 
                 rocket.distance = 98.786 + 2;
                 
                 if (rocket.distance == station.distance)
                 {   
+
+                    cout << "Updated Breath Stats: " << endl;
+                    
+                    people.person1_breath = 400 - Breathtaker.breathTaker_damage - Breathtaker.lasting_affects;
+                    cout << people.name1 << " Air: " << people.person1_breath << endl;
+                    people.person2_breath = 400 - Breathtaker.breathTaker_damage - Breathtaker.lasting_affects;
+                    cout << people.name2 << " Air: " << people.person2_breath << endl;
+                    cout << endl;
+                    sleep(1);
                     cout << rocket.name << " reached the space station" << endl;
                     sleep(1);
                     people.person1_health = 120 - radtion.damage;
                     people.person2_health = 120 - radtion.damage;
                     //Declaring argument for time()
                     time_t tt;
+
                   
                     //Declaring variable to store return value of
                     // localtime()
@@ -174,11 +210,13 @@ int main(int argc, const char * argv[]) {
                     ti = localtime(&tt);
                   
                     cout << "Current Day, Date and Time is: " << asctime(ti);
+                    //asctime(ti) encrypted into number bytes 
                     //1652697093
                     //1652697112
                     
                     cout << rocket.name << " will be leaving in " << endl;
-                    
+                    cout << "4" << endl;
+                    sleep(1);
                     cout << "3" << endl;
                     sleep(1);
                     cout << "2" << endl;
@@ -192,18 +230,26 @@ int main(int argc, const char * argv[]) {
                         cout << "Rocket_2 direction is facing earth_direction" << endl;
                         people.person1_health = 140 - radtion.damage;
                         people.person2_health = 140 - radtion.damage;
+
                         if (rocket_2.distance == earth.distance)
                         {
+
                             cout << rocket.name << " is leaving the station" << endl;
+                            people.person1_health = 110 - radtion.damage;
+                            people.person2_health = 110 - radtion.damage;
+
                                 
                             if (rocket_2.speed > earth.gravity_2)
                             {
                                 cout << people.name1 << " " << people.name2 << " " << rocket.name << " successfuly reached earth" << endl;
+
                             }
                             else
                             {
                                 cout << rocket.name << " blew up trying to reach earth " << endl;
                                 exit(1);
+
+                        
                             }
                             
                                 
