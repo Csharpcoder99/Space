@@ -198,7 +198,7 @@ int main(int argc, const char * argv[]) {
                                 
                             if (rocket_2.speed > earth.gravity_2)
                             {
-                                cout << people.name1 << people.name2 << rocket.name << " successfuly reached earth" << endl;
+                                cout << people.name1 << " " << people.name2 << " " << rocket.name << " successfuly reached earth" << endl;
                             }
                             else
                             {
