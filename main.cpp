@@ -1,14 +1,14 @@
 //
 //  main.cpp
-//  function
 // This is inspired by Return to Space on Netflix
 
 #include <iostream>
 #include <unistd.h>
 #include <ctime>
+#include <fstream>
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+int main() {
     // insert code here...
 
     system("clear");
@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
 
     };
 
-    class Radetion
+    class Radiation
     {
         public:
         int damage;
@@ -56,6 +56,7 @@ int main(int argc, const char * argv[]) {
     class Spacestation
     {
         public:
+        int id;
         double direction;
         double distance;
     };
@@ -79,6 +80,8 @@ int main(int argc, const char * argv[]) {
         double distance;
         string name;
     };
+
+    int randomNumber = rand();
     
     Rocket rocket;
     rocket.speed = 1000;
@@ -94,9 +97,10 @@ int main(int argc, const char * argv[]) {
     earth.distance = 800.321;
     
     Spacestation station;
-    station.direction = 574.47;
-    station.distance = 100.786;
-    
+    station.direction = 574.47; 
+    station.distance = 100.786; // distance from earth
+    station.id = randomNumber;
+
     Rocket_2 rocket_2;
     rocket_2.speed = 400;
     rocket_2.weight = 221;
@@ -113,8 +117,8 @@ int main(int argc, const char * argv[]) {
     people.person2_breath = 400;
 
     
-    Radetion radtion;
-    radtion.damage = 30;
+    Radiation radiation;
+    radiation.damage = 30;
 
     breathTaker Breathtaker;
     Breathtaker.breathTaker_damage = 20;
@@ -139,8 +143,8 @@ int main(int argc, const char * argv[]) {
             sleep(1);
             
             cout << rocket.name << " reach low orbit" << endl;
-            people.person1_health = 200 - radtion.damage;
-            people.person2_health = 200 - radtion.damage;
+            people.person1_health = people.person1_health - radiation.damage;
+            people.person2_health = people.person2_health - radiation.damage;
             //time code
             /* Declaring argument for time()
             time_t tt;
@@ -163,8 +167,8 @@ int main(int argc, const char * argv[]) {
             if (rocket.direction == station.direction)
             {
 
-                people.person1_health = 170 - radtion.damage;
-                people.person2_health = 170 - radtion.damage;
+                people.person1_health = 170 - radiation.damage;
+                people.person2_health = 170 - radiation.damage;
                 cout << "Rocket and Space station Stats: " << endl;
                 cout << rocket.name << " is facing the the space station" << endl;
                 cout << "Station Direction: " << station.direction << endl;
@@ -175,7 +179,8 @@ int main(int argc, const char * argv[]) {
                 cout << endl;
 
                 cout << "Person Stats" << endl;
-                cout << "Person Health: " << people.person1_health << " Person 2 Health: " << people.person2_health << endl;
+                cout << people.name1 << " Health: " << people.person1_health << endl;
+                cout << people.name2 << " Health: " << people.person2_health << endl;
                 cout << people.name1  << " Air: " << people.person1_breath << " " << people.name2 << " Air: " << people.person2_breath << endl;
                 
                 rocket.distance = 98.786 + 2;
@@ -193,8 +198,8 @@ int main(int argc, const char * argv[]) {
                     sleep(1);
                     cout << rocket.name << " reached the space station" << endl;
                     sleep(1);
-                    people.person1_health = 120 - radtion.damage;
-                    people.person2_health = 120 - radtion.damage;
+                    people.person1_health = 120 - radiation.damage;
+                    people.person2_health = 120 - radiation.damage;
                     //Declaring argument for time()
                     time_t tt;
 
@@ -228,20 +233,73 @@ int main(int argc, const char * argv[]) {
                     if (rocket_2.direction == earth.direction)
                     {
                         cout << "Rocket_2 direction is facing earth_direction" << endl;
-                        people.person1_health = 140 - radtion.damage;
-                        people.person2_health = 140 - radtion.damage;
+                        people.person1_health = 140 - radiation.damage;
+                        people.person2_health = 140 - radiation.damage;
 
                         if (rocket_2.distance == earth.distance)
                         {
 
                             cout << rocket.name << " is leaving the station" << endl;
-                            people.person1_health = 110 - radtion.damage;
-                            people.person2_health = 110 - radtion.damage;
+                            people.person1_health = 110 - radiation.damage;
+                            people.person2_health = 110 - radiation.damage;
+                            
+                            ofstream data;
+                            data.open("Data source.txt");
+                            data << "This data was created by the simulation not to used" << endl;
+                            data << "This data is not accurate." << endl;
+                            data << "The program was created for the following reasons: Fun, Tournament, Competitive programming" << endl;
+                            data.close();
+                            
+                            ofstream Rocket_data;
+                            Rocket_data.open("Space data/Rocket_1 data.txt");
+                            Rocket_data << "Rocket Name: " << rocket.name << endl;
+                            Rocket_data << "Rocket Speed: " << rocket.speed << endl;
+                            Rocket_data << "Rocket Weight: " << rocket.weight << endl;
+                            Rocket_data << "Rocket Direction: " << rocket.direction << endl;
+                            Rocket_data << "Distance: " << rocket.distance << endl;
+                            Rocket_data.close();
 
-                                
+                            ofstream Rocket_2;
+                            Rocket_2.open("Space data/Rocket_2 Data.txt");
+                            Rocket_2 << "Rocket Name: " << rocket_2.name << endl;
+                            Rocket_2 << "Rocket Speed: " << rocket_2.speed << endl;
+                            Rocket_2 << "Rocket Weight: " << rocket_2.weight << endl;
+                            Rocket_2 << "Rocket Direction: " << rocket_2.direction << endl;
+                            Rocket_2 << "Rocket Distance: " << rocket_2.distance << endl;
+                            Rocket_2.close(); // closing the function will create the file that stores the data for the rocket
+                            
+                            ofstream People;
+                            People.open("Space data/Astronaut_1 data.txt");
+                            People << "Astronaut Name: " << people.name1 << endl;
+                            People << "Astronaut Health: " << people.person1_health << endl;
+                            People << "Astronaut Air Tank: " << people.person1_breath << endl;
+                            People.close();
+
+                            ofstream People_2;
+                            People_2.open("Space data/Astronaut_data 2.txt");
+                            People_2 << "Astronaut Name: " << people.name2 << endl;
+                            People_2 << "Astronaut Health: " << people.person2_health << endl;
+                            People_2 << "Astronaut Air Tank: " << people.person2_breath << endl;
+                            People_2.close();
+
+                            ofstream Earth_data;
+                            Earth_data.open("Space data/earth data.txt");
+                            Earth_data << "Earth Gravity: " << earth.gravity << endl;
+                            Earth_data << "Earth Direction: " << earth.direction << endl;
+                            Earth_data << "Earth Distance: " << earth.distance << endl;
+                            Earth_data.close();
+
+                            ofstream Station;
+                            Station.open("Space data/station data.txt");
+                            Station << "Station Id: " << station.id << endl;
+                            Station << "Direction: " << station.direction << endl;
+                            Station << "Distance: " << station.distance << endl;
+                            Station.close();
+                            
                             if (rocket_2.speed > earth.gravity_2)
                             {
-                                cout << people.name1 << " " << people.name2 << " " << rocket.name << " successfuly reached earth" << endl;
+                                cout << people.name1 << " and " << people.name2 << " successfully reached earth with the help of "  << rocket.name << endl;
+                                exit(1);
 
                             }
                             else
